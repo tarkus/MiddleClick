@@ -8,7 +8,6 @@
 
 #import "Controller.h"
 #import <Cocoa/Cocoa.h>
-#import "TrayMenu.h"
 #include <math.h>
 #include <unistd.h>
 #include <CoreFoundation/CoreFoundation.h>
@@ -84,10 +83,6 @@ BOOL pressed;
 	WakeObserver *wo = [[WakeObserver alloc] init];
 	[[[NSWorkspace sharedWorkspace] notificationCenter] addObserver: wo selector: @selector(receiveWakeNote:) name: NSWorkspaceDidWakeNotification object: NULL];
 	
-	
-	//add traymenu
-    TrayMenu *menu = [[TrayMenu alloc] initWithController:self];
-    [NSApp setDelegate:menu];
     [NSApp run];
 	
 	[pool release];
