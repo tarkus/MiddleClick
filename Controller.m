@@ -73,8 +73,11 @@ BOOL pressed;
 	//Iterate and register callbacks for multitouch devices.
 	for(int i = 0; i<[deviceList count]; i++) //iterate available devices
 	{
-        MTRegisterContactFrameCallback((MTDeviceRef)[deviceList objectAtIndex:i], callback); //assign callback for device
-        MTDeviceStart((MTDeviceRef)[deviceList objectAtIndex:i],0); //start sending events
+        MTDeviceRef device = [deviceList objectAtIndex:i];
+        if (MTDeviceIsBuiltIn(device)) {
+            MTRegisterContactFrameCallback((MTDeviceRef)[deviceList objectAtIndex:i], callback); //assign callback for device
+            MTDeviceStart((MTDeviceRef)[deviceList objectAtIndex:i],0); //start sending events
+        }
 	}
 	
 	//register a callback to know when osx come back from sleep
